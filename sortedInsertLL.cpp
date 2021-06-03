@@ -2,6 +2,7 @@
 
 using namespace std;
 
+//struct ll
 struct Node {
 	int data;
 	Node *next;
@@ -11,24 +12,26 @@ struct Node {
 	}
 };
 
-Node *insertAtBeginning (Node *head, int x) {
-	Node *temp = new Node(x);
-	temp -> next = head;
-	return temp;
+void printLL(Node *head) {
+	Node *curr = head;
+
+	while(curr) {
+		cout<<curr -> data<<" ";
+		curr = curr -> next;
+	}
 }
 
-Node *sortedInsert (Node *head, int val) {
+Node *sortedInsert(Node *head, int val) {
 	Node *temp = new Node(val);
-	if (head == NULL) {
-		head = temp;
-		return head;
-	}
+	if (head == NULL) return temp;
+	Node *curr = head;
+
 	if (val < head -> data) {
 		temp -> next = head;
 		return temp;
 	}
-	Node *curr = head;
-	while((curr -> next -> data < val) && (curr -> next != NULL)) {
+
+	while(curr -> next != NULL && curr -> next -> data < val) {
 		curr = curr -> next;
 	}
 	temp -> next = curr -> next;
@@ -36,35 +39,18 @@ Node *sortedInsert (Node *head, int val) {
 	return head;
 }
 
+
 int main() {
-	// Node *head = new Node(995);
-	// head -> next = new Node(996);
-	// head -> next -> next = new Node(997);
-	// head -> next -> next -> next = new Node(998);
-	// head -> next -> next -> next -> next = new Node(999);
 
-	// int key = 99;
-	// cout<<recursiveLinkedListSearch(head, key);
+	Node *head = new Node(10);
+	head -> next = new Node(20);
+	head -> next -> next = new Node(30);
+	head -> next -> next -> next = new Node(40);
+	head -> next -> next -> next -> next = new Node(50);
 
-	Node *head = NULL;
-	head = insertAtBeginning(head, 10);
-	cout<<head<<endl;
-	head = insertAtBeginning(head, 20);
-	cout<<head<<endl;
-	head = insertAtBeginning(head, 30);
-	cout<<head<<endl;
+	head = sortedInsert(head, 55);
 
-	// head = deleteAtBegin(head);
-	// cout<<head<<endl;
-	// head = deleteAtBegin(head);
-	// cout<<head<<endl;
-	// head = deleteAtBegin(head);
-	// cout<<head<<endl;
-
-	head = sortedInsert(head, 25);
-	cout<<head<<endl;
-
-
+	printLL(head);
 
 	return 0;
 }
